@@ -21,42 +21,51 @@ fingers_dict = {
     'pulgar':{
         'ex1':{
             '1':[10,12],
+            '0':[1,2,3,4],
             '-1':[9,11]
         },
         'ex2':{
             '1':[2,4,6,7],
+            '0':[],
             '-1':[1,3,5,8]
         },
         'ex3':{
             '1':[1,2,5,6,10,12,16,20],
+            '0':[],
             '-1':[3]
         }
     },
     'indice':{
         'ex1':{
             '1':[1],
+            '0':[3,4,9,10,11,12],
             '-1':[2]
         },
         'ex2':{
             '1':[1,6],
+            '0':[],
             '-1':[2,3,4,5,7,8]
         },
         'ex3':{
             '1':[1,2,3,5,6,10,12,16,20],
+            '0':[],
             '-1':[]
         }
     },
     'corazon':{
         'ex1':{
             '1':[3],
+            '0':[1,2,9,10,11,12],
             '-1':[4]
         },
         'ex2':{
             '1':[1,6,7],
+            '0':[],
             '-1':[2,3,4,5,8]
         },
         'ex3':{
             '1':[1,2,3,5,10,12,16,20],
+            '0':[6],
             '-1':[]
         }
     }
@@ -176,16 +185,16 @@ def procesar_archivo(ruta):
 
     length = len(data['emg'])
 
-    insert_dict['restimulus']   = data['restimulus'].flatten()
-    insert_dict['rerepetition'] = data['rerepetition'].flatten()
+    insert_dict['restimulus']   = data['restimulus'].flatten().astype(np.float64)
+    insert_dict['rerepetition'] = data['rerepetition'].flatten().astype(np.float64)
 
-    insert_dict['exercise'] = np.repeat(data['exercise'], length, axis=0).flatten()
-    insert_dict['subject']  = np.repeat(data['subject'], length, axis=0).flatten()
+    insert_dict['exercise'] = np.repeat(data['exercise'], length, axis=0).flatten().astype(np.float64)
+    insert_dict['subject']  = np.repeat(data['subject'], length, axis=0).flatten().astype(np.float64)
     insert_dict['db'] = np.full(length, db, dtype=np.float64)
     insert_dict['hz'] = np.full(length, hz, dtype=np.float64)
 
     # Separate each column into a separate emg array
-    insert_dict.update({f"emg{i+1}": data['emg'][:, i] for i in range(data['emg'].shape[1]) if i < 10})
+    insert_dict.update({f"emg{i+1}": data['emg'][:, i].astype(np.float64) for i in range(data['emg'].shape[1]) if i < 10})
 
     # Find the minimum number of rows across all columns
     min_rows = min(len(col) for col in insert_dict.values())
@@ -194,6 +203,7 @@ def procesar_archivo(ruta):
     for key in insert_dict.keys():
         insert_dict[key] = insert_dict[key][:min_rows]
 
+    ''' WRONG APROACH: REALISED THEY ARE NEEDED FOR WINDOWS VALUES FOR THOSE THAT ARE AFTER THESE VALUES
     # New Finger Columns
         # Delete Non Usable Columns
     filt = ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], exercise1_restimulus))) |\
@@ -202,12 +212,21 @@ def procesar_archivo(ruta):
 
     # Update the dictionary by keeping only the rows that satisfy the filter condition
     insert_dict = {key: value[filt] for key, value in insert_dict.items()}
+    '''
 
     # New columns based on finger direction
         # Initialize the new columns with default values (e.g., 0)
-    pulgar_array  = np.zeros(insert_dict['db'].shape)
-    indice_array  = np.zeros(insert_dict['db'].shape)
-    corazon_array = np.zeros(insert_dict['db'].shape)
+    pulgar_array  = np.full(insert_dict['db'].shape, 2, dtype=np.float64)
+    indice_array  = np.full(insert_dict['db'].shape, 2, dtype=np.float64)
+    corazon_array = np.full(insert_dict['db'].shape, 2, dtype=np.float64)
+
+    filt = (insert_dict['restimulus'] == 0)
+
+    pulgar_array[filt] = 0
+    indice_array[filt] = 0
+    corazon_array[filt] = 0
+
+    ### PULGAR ###
 
     # Change Values with Filters
     filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['pulgar']['ex1']['1']))) |\
@@ -217,11 +236,20 @@ def procesar_archivo(ruta):
     pulgar_array[filt] = 1
 
     # Change Values with Filters
+    filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['pulgar']['ex1']['0']))) |\
+            ((insert_dict['exercise'] == 2) & (np.isin(insert_dict['restimulus'], fingers_dict['pulgar']['ex2']['0']))) |\
+            ((insert_dict['exercise'] == 3) & (np.isin(insert_dict['restimulus'], fingers_dict['pulgar']['ex3']['0'])))
+
+    pulgar_array[filt] = 0
+
+    # Change Values with Filters
     filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['pulgar']['ex1']['-1']))) |\
             ((insert_dict['exercise'] == 2) & (np.isin(insert_dict['restimulus'], fingers_dict['pulgar']['ex2']['-1']))) |\
             ((insert_dict['exercise'] == 3) & (np.isin(insert_dict['restimulus'], fingers_dict['pulgar']['ex3']['-1'])))
 
     pulgar_array[filt] = -1
+
+    ### INDICE ###
 
     # Change Values with Filters
     filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['indice']['ex1']['1']))) |\
@@ -231,11 +259,20 @@ def procesar_archivo(ruta):
     indice_array[filt] = 1
 
     # Change Values with Filters
+    filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['indice']['ex1']['0']))) |\
+            ((insert_dict['exercise'] == 2) & (np.isin(insert_dict['restimulus'], fingers_dict['indice']['ex2']['0']))) |\
+            ((insert_dict['exercise'] == 3) & (np.isin(insert_dict['restimulus'], fingers_dict['indice']['ex3']['0'])))
+
+    indice_array[filt] = 0
+
+    # Change Values with Filters
     filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['indice']['ex1']['-1']))) |\
             ((insert_dict['exercise'] == 2) & (np.isin(insert_dict['restimulus'], fingers_dict['indice']['ex2']['-1']))) |\
             ((insert_dict['exercise'] == 3) & (np.isin(insert_dict['restimulus'], fingers_dict['indice']['ex3']['-1'])))
 
     indice_array[filt] = -1
+
+    ### CORAZON ###
 
     # Change Values with Filters
     filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['corazon']['ex1']['1']))) |\
@@ -243,6 +280,13 @@ def procesar_archivo(ruta):
             ((insert_dict['exercise'] == 3) & (np.isin(insert_dict['restimulus'], fingers_dict['corazon']['ex3']['1'])))
 
     corazon_array[filt] = 1
+
+    # Change Values with Filters
+    filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['corazon']['ex1']['0']))) |\
+            ((insert_dict['exercise'] == 2) & (np.isin(insert_dict['restimulus'], fingers_dict['corazon']['ex2']['0']))) |\
+            ((insert_dict['exercise'] == 3) & (np.isin(insert_dict['restimulus'], fingers_dict['corazon']['ex3']['0'])))
+
+    corazon_array[filt] = 0
 
     # Change Values with Filters
     filt =  ((insert_dict['exercise'] == 1) & (np.isin(insert_dict['restimulus'], fingers_dict['corazon']['ex1']['-1']))) |\
@@ -260,7 +304,7 @@ def procesar_archivo(ruta):
 
 def main():
     # Connect to SQLite database (or create it if it doesn't exist)
-    conn = sqlite3.connect(nina_folder + '/SQL/RawData.db')
+    conn = sqlite3.connect(nina_folder + '/SQL/Raw/RawData.db')
     cursor = conn.cursor()
 
     if not check_table_exists(conn, cursor, "raw_data"):
