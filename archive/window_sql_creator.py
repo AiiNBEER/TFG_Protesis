@@ -456,9 +456,12 @@ def process_windows(raw_conn, raw_cursor):
                 id_list = [i - z for z in range(max_hz_rows, -1, -1)]
                 window = get_rows_by_ids(raw_conn, raw_cursor, 'raw_data', id_list)
 
+                if len(window) < max_hz_rows:
+                    continue
+
                 #check_window = window[:, [1,3]]
 
-                if np.all(window[1] != window[1][0]) or np.all(window[3] != window[3][0]): # IF SUBJECT OR DB DIFF
+                if np.all(window[:,1] != window[:,1][0]) or np.all(window[:,3] != window[:,3][0]): # IF SUBJECT OR DB DIFF
                     continue
                 
                 # Decode the byte strings to the appropriate data types according to the schema
@@ -575,7 +578,7 @@ def process_windows(raw_conn, raw_cursor):
                         insert_into_table(connections_dict[timeframe_values[timeframe_value]]['conn'], connections_dict[timeframe_values[timeframe_value]]['cursor'], ica_types[ica], new_table_columns, values_dict)
                         '''
 
-    if len(values_dict['id']) == 1000:
+    if len(values_dict['id']) > 0:
         insert_into_table(connections_dict[timeframe_values[timeframe_value]]['conn'], connections_dict[timeframe_values[timeframe_value]]['cursor'], ica_types[ica], new_table_columns, values_dict)
 
 def main():
