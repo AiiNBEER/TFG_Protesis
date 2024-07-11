@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net" modified="2024-07-11T12:35:45.613Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="Jp1H5PGCa4IDw_iBySdZ" version="24.6.4" type="device">
+  <diagram name="Página-1" id="rVJvQA8OT4R0wOPResJ4">
+    <mxGraphModel dx="913" dy="454" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-26" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="190" y="135" width="850" height="305" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0000CC;fontColor=#ffffff;strokeColor=#001DBC;gradientColor=#6666FF;" vertex="1" parent="1">
+          <mxGeometry x="220" y="195" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-2" value="Arduino Nano" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="232.5" y="205" width="95" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="6TMIkSFzb1QhX6yuikU5-3" target="6TMIkSFzb1QhX6yuikU5-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#000066;fontColor=#ffffff;strokeColor=#001DBC;gradientColor=#000033;" vertex="1" parent="1">
+          <mxGeometry x="360" y="160" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-5" value="ESP32 Core 1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="175" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-6" value="ESP32 Core 2" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="175" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-10" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#e3c800;strokeColor=#B09500;" edge="1" parent="1" source="6TMIkSFzb1QhX6yuikU5-2" target="6TMIkSFzb1QhX6yuikU5-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="330" as="sourcePoint" />
+            <mxPoint x="320" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-12" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#e3c800;strokeColor=#B09500;" edge="1" parent="1" source="6TMIkSFzb1QhX6yuikU5-5" target="6TMIkSFzb1QhX6yuikU5-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="338" y="235" as="sourcePoint" />
+            <mxPoint x="380" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-13" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#000066;fontColor=#ffffff;strokeColor=#001DBC;gradientColor=#000033;" vertex="1" parent="1">
+          <mxGeometry x="700" y="160" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-14" value="ESP32 Core 1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="710" y="175" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-15" value="ESP32 Core 2" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="175" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-16" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#e3c800;strokeColor=#B09500;" edge="1" parent="1" source="6TMIkSFzb1QhX6yuikU5-14" target="6TMIkSFzb1QhX6yuikU5-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="678" y="235" as="sourcePoint" />
+            <mxPoint x="720" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-17" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#e3c800;strokeColor=#B09500;" edge="1" parent="1" source="6TMIkSFzb1QhX6yuikU5-6" target="6TMIkSFzb1QhX6yuikU5-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="830" y="235" as="sourcePoint" />
+            <mxPoint x="890" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-21" value="Toma de&amp;nbsp;&lt;div&gt;señales&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;EMG&lt;/span&gt;&lt;/div&gt;" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="310" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-22" value="Ventanas, centrado y &lt;i&gt;whitening&lt;/i&gt;" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="310" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-23" value="FastICA" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="535" y="310" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-24" value="mDWT Haar" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="705" y="310" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="6TMIkSFzb1QhX6yuikU5-25" value="Cálculo características y modelo" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="875" y="310" width="120" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
